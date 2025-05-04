@@ -14,10 +14,10 @@ def home():
 @app.route('/coinprice')
 def get_coin_details():
     coin_data = CoinDCXAPI()
-    # coin_price_data = coin_data.get_coin_details(['BTCUSDT', 'DOGEUSDT', 'PEPEUSDT'])
-    # required_fields = ['market', 'last_price']
-    coin_price_data = coin_data.get_binance_coin_data(['BTCUSDT', 'DOGEUSDT', '1000PEPEUSDT'])
-    required_fields = ['symbol', 'price']
+    coin_price_data = coin_data.get_coin_details(['BTCUSDT', 'DOGEUSDT', 'PEPEUSDT'])
+    required_fields = ['market', 'last_price']
+    # coin_price_data = coin_data.get_binance_coin_data(['BTCUSDT', 'DOGEUSDT', '1000PEPEUSDT'])
+    # required_fields = ['symbol', 'price']
     print(coin_price_data)
     if coin_price_data:
         coin_price_data_list = [[coin_price.get(field) for field in required_fields] for coin_price in coin_price_data]
