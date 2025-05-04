@@ -3,6 +3,7 @@ import requests
 
 class CoinDCXAPI:
     market_data_url = "https://api.coindcx.com/exchange/ticker"
+    binance_coin_data_url = "https://fapi.binance.com/fapi/v1/ticker/price"
 
     def __init__(self):
         pass
@@ -49,7 +50,21 @@ class CoinDCXAPI:
                 return coin_price_details.get(coin_names)
         return None
 
+    def get_binance_coin_data(self, symbols=None):
+        coins_data = []
+        if symbols:
+            for symbol in symbols:
+                params = {'symbol': symbol}
+                coin_data = self.__fetch_api_url(self.binance_coin_data_url, params)
+                coins_data.append(coin_data)
+        else:
+            coins_data = self.__fetch_api_url(self.binance_coin_data_url)
+        return coins_data
+
+
 
 if __name__ == '__main__':
     obj = CoinDCXAPI()
-    print(obj.get_coin_details('BTCUSDT'))
+    # print(obj.get_coin_details('BTCUSDT'))
+    x = obj.get_binance_coin_data()#['BTCUSDT', 'DOGEUSDT', '1000PEPEUSDT'])
+    print(x)
